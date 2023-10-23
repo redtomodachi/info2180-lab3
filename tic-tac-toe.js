@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded',function()
 {
     const board = document.getElementById('board');
     const statusy = document.getElementById('status');
-    if (board && statusy)
+    const newgame = document.querySelector('.btn');
+    if (board && statusy && newgame)
     {
         const squares = board.getElementsByTagName('div');
         const game = new Array(squares.length).fill('E');
@@ -43,6 +44,20 @@ document.addEventListener('DOMContentLoaded',function()
                 }
             });
         }
+        newgame.addEventListener('click',function()
+        {
+            game.fill('E');
+            gameOver=false;
+            statusy.textContent='Move your mouse over a square and click to play an X or an O.';
+            statusy.classList.remove('you-won');
+            currentMove = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+            for(let i =0;i < squares.length;i++)
+            {
+                squares[i].innerHTML = '';
+                squares[i].classList.remove('X','O');
+            }
+        });
+
         function winCheck()
         {
             const winCombos =
